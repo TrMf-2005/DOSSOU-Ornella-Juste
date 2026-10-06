@@ -1,0 +1,2 @@
+ornella1.jpg = page de bienvenue ; ornella2.jpg = derniere page.
+Pour ajouter d'autres photos au diaporama final, mets-les ici et ajoute leurs noms dans la ligne PHOTOS de index.html.
