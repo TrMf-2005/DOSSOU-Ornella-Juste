@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Joyeux anniversaire Ornella</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#25050c;--bg2:#6b1020;--ink:#fff3ee;--soft:#f6d3d3;--gold:#f5c26b;--rose:#ff7a8a;--card:rgba(255,255,255,.09);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#25050c;--bg2:#6b1020}}
+:root[data-theme="dark"]{--bg1:#25050c;--bg2:#6b1020}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:Poppins,system-ui,sans-serif;font-weight:300;
+background:radial-gradient(circle at 20% 10%,var(--bg2),var(--bg1) 70%) fixed;background-color:var(--bg1);overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.heart,.bf{position:fixed;pointer-events:none;z-index:0}
+.heart{bottom:-30px;opacity:.5;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+.bf{animation:fly linear forwards;opacity:.9}
+@keyframes fly{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(30px,-25px) rotate(10deg)}50%{transform:translate(65px,15px) rotate(-10deg)}75%{transform:translate(95px,-20px) rotate(15deg)}100%{transform:translate(130px,0) rotate(0);opacity:0}}
+.step{display:none;min-height:100vh;padding:32px 22px 70px;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;z-index:1}
+.step.on{display:flex;animation:in .9s ease both}
+@keyframes in{from{opacity:0;transform:translateY(18px)}}
+h1,h2{font-family:'Playfair Display',Georgia,serif;font-weight:600;margin:.2em 0;line-height:1.2}
+h1{font-size:clamp(2.1rem,9vw,3.4rem)}
+h2{font-size:clamp(1.5rem,6vw,2.1rem);color:var(--gold)}
+.name{font-style:italic;color:var(--gold)}
+p{max-width:34ch;line-height:1.8;color:var(--soft);font-size:1.02rem}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:24px 22px;max-width:440px;width:100%;backdrop-filter:blur(8px);margin:14px 0}
+.card p{max-width:none;margin:.7em 0;min-height:1.8em}
+.tw.on::after{content:'▍';color:var(--gold);animation:bl .7s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+button{font:500 1rem Poppins,sans-serif;color:#3a0c16;background:linear-gradient(135deg,var(--gold),#ffdca0);border:0;border-radius:40px;padding:14px 30px;margin-top:18px;cursor:pointer;box-shadow:0 8px 24px rgba(245,194,107,.35);transition:transform .2s}
+button:active{transform:scale(.96)}
+.photo{width:min(78vw,300px);border-radius:22px;border:2px solid rgba(245,194,107,.6);box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 30px rgba(245,194,107,.25);margin:12px 0}
+.avatar{width:min(46vw,190px);height:min(46vw,190px);border-radius:50%;object-fit:cover;object-position:50% 14%;border:3px solid var(--gold);box-shadow:0 12px 36px rgba(0,0,0,.5),0 0 34px rgba(245,194,107,.3);margin-bottom:6px}
+.photo.s{width:min(66vw,250px)}
+.bar{width:min(78vw,300px);height:4px;border-radius:4px;background:rgba(255,255,255,.2);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.hint{font-size:.85rem;margin:.6em 0 0}
+input{font:400 1.6rem Poppins,sans-serif;width:120px;text-align:center;padding:12px;border-radius:16px;border:1px solid var(--gold);background:rgba(255,255,255,.08);color:var(--ink);outline:0;margin-top:14px}
+.err{min-height:1.6em;color:var(--rose);font-size:.95rem;margin-top:12px}
+.shake{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.dots{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:2;pointer-events:none}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3)}
+.dots i.on{background:var(--gold);width:20px;border-radius:6px}
+#mus{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:14px;z-index:6;margin:0;padding:8px 13px;font-size:1.1rem;display:none}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<button id="mus" onclick="toggle()" aria-label="Musique">🎵</button>
+
+<section class="step on" id="s0">
+  <img class="avatar" src="photos/ornella1.jpg" alt="Ornella">
+  <h1>Bienvenue,<br><span class="name">Ornella</span></h1>
+  <p>Cette page a été faite rien que pour toi, pour une journée qui est la tienne.</p>
+  <p class="hint">🔊 Allume le son pour la surprise</p>
+  <button onclick="go(1)">Entrer ✨</button>
+</section>
+
+<section class="step" id="s1">
+  <h2>Joyeux anniversaire ❤️</h2>
+  <img class="photo" src="assets/gateau.jpg" alt="Gâteau d'anniversaire">
+  <div class="bar"><i id="pg"></i></div>
+  <p class="hint" id="wait">Laisse la musique se terminer, la surprise arrive juste après 🎉</p>
+  <button id="next1" hidden onclick="go(2)">❤️ La suite de la surprise ❤️</button>
+</section>
+
+<section class="step" id="s2">
+  <div style="font-size:3rem">🔐</div>
+  <h2>Un petit cadenas</h2>
+  <p>Pour découvrir la vraie surprise, entre d'abord ton âge actuel 🌹</p>
+  <input id="age" type="tel" inputmode="numeric" maxlength="3" placeholder="00" aria-label="Ton âge">
+  <div class="err" id="err"></div>
+  <button onclick="check()">Ouvrir</button>
+</section>
+
+<section class="step" id="s3">
+  <h1 style="font-size:2rem">🥳 Joyeux anniversaire 🥳</h1>
+  <h2 class="name" style="font-size:1.5rem">🌸 Ornella 🌸</h2>
+  <div class="card"><p class="tw" id="a1"></p><p class="tw" id="a2"></p></div>
+  <button id="b3a" hidden onclick="part2()">La suite</button>
+  <div id="part2" hidden style="display:flex;flex-direction:column;align-items:center;width:100%">
+    <img class="photo s" src="assets/gateau_3.jpg" alt="Gâteau Happy Birthday">
+    <div class="card"><p class="tw" id="b1"></p><p class="tw" id="b2"></p></div>
+  </div>
+  <button id="b3b" hidden onclick="go(4)">Une p'tite dernière chose 💌</button>
+</section>
+
+<section class="step" id="s4">
+  <div id="gal" hidden><img class="photo" id="slide" alt="Ornella" style="object-fit:cover;object-position:50% 30%;transition:opacity .5s"></div>
+  <div class="card">
+    <h2>Chère Ornella ❤️</h2>
+    <p>Certaines histoires ne suivent pas le chemin qu'on avait imaginé. Les circonstances ont décidé autrement, et pourtant, cela n'enlève rien à la valeur de ce que nous avons partagé.</p>
+    <p>Tu comptes pour moi, hier comme aujourd'hui, et je voulais que tu le saches en ce jour spécial.</p>
+    <p>Prends soin de toi, et vis cette journée comme aucune autre.</p>
+    <p style="color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem">Joyeux anniversaire ❤️</p>
+  </div>
+  <button onclick="confetti()">Encore des étoiles 🎉</button>
+</section>
+
+<div class="dots" id="dots"></div>
+
+<script>
+/* ==========================================================
+   MOT DE PASSE DU CADENAS = L'ÂGE D'ORNELLA (chiffres seulement)
+   Actuellement : 21 ans. Si ce n'est pas le bon âge,
+   change simplement le nombre entre guillemets ci-dessous
+   (ex: var AGE="22";) puis redéploie le site.
+   ========================================================== */
+var AGE="21";
+var PHOTOS=["photos/ornella2.jpg"];     // photos d'Ornella, ex: ["photos/1.jpg","photos/2.jpg"]
+var TXT={
+ a1:"Chère Ornella ❤️ Aujourd'hui est un jour spécial, car il célèbre une personne exceptionnelle. Je tiens à te souhaiter un très joyeux anniversaire ! Tu es une personne exceptionnelle, et je suis vraiment reconnaissant de t'avoir connue.",
+ a2:"Que cette nouvelle année t'apporte bonheur, succès, santé et surtout l'amour. Que tes rêves deviennent réalité et que jamais ton sourire ne s'éteigne ✨",
+ b1:"Que cette journée soit remplie de bonheur, de rires et de moments inoubliables. Je te souhaite tout le meilleur pour cette nouvelle année qui commence pour toi. Profite de chaque instant, et sache que tu es aimée bien plus que tu ne peux l'imaginer ! 🎉🎂",
+ b2:"Je t'envoie tous mes câlins possibles, puisqu'on ne peut pas se voir en ce jour qui est le tien. Que Dieu te bénisse abondamment aujourd'hui et toujours, en t'ouvrant toutes les portes 🙏"
+};
+var $=function(i){return document.getElementById(i)};
+function type(id,done){
+  var el=$(id),t=TXT[id],k=0;el.classList.add('on');
+  (function step(){
+    if(k<t.length){el.textContent+=t.charAt(k++);setTimeout(step,32)}
+    else{el.classList.remove('on');if(done)done()}
+  })();
+}
+function reveal(id){$(id).hidden=false;$(id).scrollIntoView({behavior:'smooth',block:'center'})}
+function part3(){type('a1',function(){type('a2',function(){reveal('b3a')})})}
+function part2(){
+  $('b3a').hidden=true;$('part2').hidden=false;confetti();
+  $('part2').scrollIntoView({behavior:'smooth',block:'start'});
+  type('b1',function(){type('b2',function(){reveal('b3b')})});
+}
+var N=5,dots=$('dots');
+for(var i=0;i<N;i++)dots.appendChild(document.createElement('i'));
+var T=['assets/s1.mp3','assets/s2.mp3','assets/s3.mp3'].map(function(s,i){var a=new Audio();a.preload=i?'none':'auto';a.src=s;return a}),cur=-1;
+T[2].loop=true;
+function play(i){
+  T.forEach(function(a,k){if(k!==i)a.pause()});
+  cur=i;var p=T[i].play();if(p&&p.catch)p.catch(function(){});
+  $('mus').style.display='block';$('mus').textContent='🎵';
+}
+function toggle(){
+  var a=T[cur];if(!a)return;
+  if(a.paused){a.play();$('mus').textContent='🎵'}else{a.pause();$('mus').textContent='🔇'}
+}
+T[0].addEventListener('timeupdate',function(){if(T[0].duration)$('pg').style.width=(T[0].currentTime/T[0].duration*100)+'%'});
+function show1(){$('next1').hidden=false;$('wait').hidden=true}
+T[0].addEventListener('ended',function(){show1();confetti()});
+var slideI=0,slideT=null;
+function startSlides(){
+  if(!PHOTOS.length||slideT)return;
+  $('gal').hidden=false;$('slide').src=PHOTOS[0];
+  if(PHOTOS.length>1)slideT=setInterval(function(){
+    slideI=(slideI+1)%PHOTOS.length;$('slide').style.opacity=0;
+    setTimeout(function(){$('slide').src=PHOTOS[slideI];$('slide').style.opacity=1},500)},3500);
+}
+var started3=false;
+function go(n){
+  document.querySelectorAll('.step').forEach(function(s,i){s.classList.toggle('on',i===n)});
+  [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===n)});
+  window.scrollTo(0,0);
+  if(n===1){play(0);setTimeout(show1,45000)}
+  if(n===3&&!started3){started3=true;part3()}
+  if(n===4){play(2);startSlides()}
+  if(n===3||n===4)confetti();
+}
+go(0);
+for(var h=0;h<14;h++){var e=document.createElement('div');e.className='heart';e.textContent=['❤️','🌹','✨'][h%3];
+e.style.left=(Math.random()*95)+'vw';e.style.fontSize=(14+Math.random()*18)+'px';
+e.style.animationDuration=(9+Math.random()*10)+'s';e.style.animationDelay=(-Math.random()*15)+'s';document.body.appendChild(e)}
+setInterval(function(){
+  var b=document.createElement('div'),d=6+Math.random()*5;b.className='bf';b.textContent='🦋';
+  b.style.left=Math.random()*85+'vw';b.style.top=Math.random()*90+'vh';b.style.fontSize=(20+Math.random()*24)+'px';
+  b.style.animationDuration=d+'s';document.body.appendChild(b);setTimeout(function(){b.remove()},d*1000)},1000);
+function check(){
+  var v=$('age').value.replace(/\D/g,''),err=$('err'),inp=$('age');
+  if(v===AGE){err.textContent='';play(1);go(3)}
+  else{err.textContent="Hmm… ce n'est pas ça 😉 Réessaie !";inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake')}
+}
+$('age').addEventListener('keydown',function(e){if(e.key==='Enter')check()});
+var cv=$('c'),cx=cv.getContext('2d'),P=[],run=false;
+function fit(){cv.width=innerWidth;cv.height=innerHeight}fit();addEventListener('resize',fit);
+function confetti(){
+  var col=['#f5c26b','#ff7a8a','#ffdca0','#ffffff','#c9184a'];
+  for(var i=0;i<130;i++)P.push({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*14,vy:-Math.random()*13-3,s:4+Math.random()*6,c:col[i%5],r:Math.random()*6,l:160});
+  if(!run){run=true;loop()}
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  P=P.filter(function(p){return p.l>0});
+  P.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.vy+=.28;p.vx*=.99;p.r+=.2;p.l--;
+    cx.save();cx.globalAlpha=Math.min(1,p.l/40);cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);cx.restore()});
+  if(P.length)requestAnimationFrame(loop);else{run=false;cx.clearRect(0,0,cv.width,cv.height)}
+}
+</script>
+</body>
+</html>
