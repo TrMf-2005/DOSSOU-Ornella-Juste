@@ -109,10 +109,8 @@ input{font:400 1.6rem Poppins,sans-serif;width:120px;text-align:center;padding:1
 
 <script>
 /* ==========================================================
-   MOT DE PASSE DU CADENAS = L'ÂGE D'ORNELLA (chiffres seulement)
-   Actuellement : 21 ans. Si ce n'est pas le bon âge,
-   change simplement le nombre entre guillemets ci-dessous
-   (ex: var AGE="22";) puis redéploie le site.
+   CADENAS : tout âge entre 20 et 30 ans est accepté
+   (modifier la condition dans la fonction check() si besoin).
    ========================================================== */
 var AGE="21";
 var PHOTOS=["photos/ornella2.jpg"];     // photos d'Ornella, ex: ["photos/1.jpg","photos/2.jpg"]
@@ -181,7 +179,7 @@ setInterval(function(){
   b.style.animationDuration=d+'s';document.body.appendChild(b);setTimeout(function(){b.remove()},d*1000)},1000);
 function check(){
   var v=$('age').value.replace(/\D/g,''),err=$('err'),inp=$('age');
-  if(v===AGE){err.textContent='';play(1);go(3)}
+  if(v!==''&&+v>=20&&+v<=30){err.textContent='';play(1);go(3)}
   else{err.textContent="Hmm… ce n'est pas ça 😉 Réessaie !";inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake')}
 }
 $('age').addEventListener('keydown',function(e){if(e.key==='Enter')check()});
